@@ -6,7 +6,7 @@
   // we are in the middle of a tail recursive set of calls. Tailrec decorated
   // functions behave differently depending on if this is true or not. Having
   // this global state lets all tailrec functions call each other.
-  var running = false;
+  var bouncing = false;
 
   // This structure represents the next call frame in the computation. Tailrec
   // functions don't actually call the function when in the middle of a
@@ -18,17 +18,22 @@
     this.args = args;
   }
 
-  window.tailrec = module.exports = function (fn) {
+  function tailrec (fn) {
     return function () {
       var ret = new More(fn, this, arguments);
-      if (running) return ret;
-      running = true;
+      if (bouncing) return ret;
+
+      bouncing = true;
       while (ret instanceof More)
         ret = ret.fn.apply(ret.context, ret.args);
-      running = false;
+      bouncing = false;
+
       return ret;
-    };
-  };
+    }
+  }
+
+  // Export
+  window.tailrec = module.exports = tailrec;
 
 })(
   typeof window !== 'undefined' ? window : {},
