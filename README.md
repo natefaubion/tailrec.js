@@ -1,7 +1,7 @@
 tailrec.js
 ==========
 
-Dead-simple trampolining for Javascript.
+Dead simple auto-trampolining for Javascript.
 
 ```js
 // Write a tail-recursive function...
