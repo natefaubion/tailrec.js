@@ -1,7 +1,7 @@
 // tailrec.js by Nathan Faubion
 // A little decorator to automatically trampoline tail recursive functions.
 
-(function (window, module) {
+;(function (window, module) {
   // Exploit Javascript's single threaded nature by having a flag for when
   // we are in the middle of a tail recursive set of calls. Tailrec decorated
   // functions behave differently depending on if this is true or not. Having
@@ -29,7 +29,7 @@
       bouncing = false;
 
       return ret;
-    }
+    };
   }
 
   // Export
