@@ -36,6 +36,6 @@
   window.tailrec = module.exports = tailrec;
 
 })(
-  typeof window !== 'undefined' ? window : {},
-  typeof module !== 'undefined' ? module : {}
+  window || {},
+  module || {}
 );
